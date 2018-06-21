@@ -7,7 +7,7 @@ steps:
       # - "--cache-from=us.gcr.io/$PROJECT_ID/stellar-core:prod-latest"
       - "--file=Dockerfile"
       - "--tag=us.gcr.io/$PROJECT_ID/stellar-core:prod-latest"
-      - "--tag=us.gcr.io/$PROJECT_ID/stellar-core:$_COMMIT_HASH"
+      - "--tag=us.gcr.io/$PROJECT_ID/stellar-core:$REVISION_ID"
       - "."
 images:
   - 'us.gcr.io/$PROJECT_ID/stellar-core'

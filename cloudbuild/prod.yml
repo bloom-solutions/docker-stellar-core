@@ -1,0 +1,14 @@
+steps:
+  # - name: 'gcr.io/cloud-builders/docker'
+  #   args: ["pull", "us.gcr.io/$PROJECT_ID/stellar-core:prod-latest"]
+  - name: 'gcr.io/cloud-builders/docker'
+    args:
+      - "build"
+      # - "--cache-from=us.gcr.io/$PROJECT_ID/stellar-core:prod-latest"
+      - "--file=Dockerfile"
+      - "--tag=us.gcr.io/$PROJECT_ID/stellar-core:prod-latest"
+      - "--tag=us.gcr.io/$PROJECT_ID/stellar-core:$_COMMIT_HASH"
+      - "."
+images:
+  - 'us.gcr.io/$PROJECT_ID/stellar-core'
+timeout: 3600s

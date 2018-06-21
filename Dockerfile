@@ -13,4 +13,4 @@ RUN export CLOUD_SDK_REPO="cloud-sdk-$(lsb_release -c -s)" && \
 
 # Add check-synced.sh script that can be used in Kubernetes livenessProbe
 ADD scripts/check-synced.sh .
-RUN chmod +x scripts/check-synced.sh
+RUN chmod +x check-synced.sh

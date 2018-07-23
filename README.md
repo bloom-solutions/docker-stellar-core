@@ -3,26 +3,42 @@
 Refer to SatoshiPay's [README](https://github.com/satoshipay/docker-stellar-core) since this is based on that with a few additions:
 
 - installation of gcloud and gsutil to allow reading and writing into Google Storage buckets
-- including a script to check for liveness
+- including a script to check for liveness (for Kubernetes)
 
-## Extra Environment Variables:
+# Examples
 
-* `GS_SERVICE_ACCOUNT_KEY`: if you use Google Storage to write history, set this environment variable to your service account key:
-  ```json
-  {
-    "type": "service_account",
-    "project_id": "project-name",
-    "private_key_id": "0n7n7cnqp84489",
-    "private_key": "-----BEGIN PRIVATE KEY-----..."
-  }
-  ```
+## Checking Liveness
 
-  Your history can then have something like this for read/write:
+```yaml
+livenessProbe:
+  exec:
+    command:
+      - /liveness/check
+      - http://localhost:11626
+  initialDelaySeconds: 180
+  periodSeconds: 180
+  failureThreshold: 10
+```
 
-  ```json
-  {
-    "local": {
-      "get": "/gsutil cp gs://bucket-name/prod/01/{0} {1}",
-      "put": "/gsutil cp {0} gs://bucket-name/prod/01/{1}"
-  }
-  ```
+# Read/write history in Google Storage
+
+`GS_SERVICE_ACCOUNT_KEY`: if you use Google Storage to write history, set this environment variable to your service account key:
+
+```json
+{
+  "type": "service_account",
+  "project_id": "project-name",
+  "private_key_id": "0n7n7cnqp84489",
+  "private_key": "-----BEGIN PRIVATE KEY-----..."
+}
+```
+
+Your history can then have something like this for read/write:
+
+```json
+{
+  "local": {
+    "get": "/gsutil cp gs://bucket-name/prod/01/{0} {1}",
+    "put": "/gsutil cp {0} gs://bucket-name/prod/01/{1}"
+}
+```

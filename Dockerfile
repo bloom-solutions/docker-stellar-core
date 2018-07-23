@@ -12,5 +12,5 @@ RUN export CLOUD_SDK_REPO="cloud-sdk-$(lsb_release -c -s)" && \
   apt-get install google-cloud-sdk -qqy
 
 # Add check-synced.sh script that can be used in Kubernetes livenessProbe
-ADD scripts/check-synced.sh .
-RUN chmod +x check-synced.sh
+ADD scripts/liveness/check /liveness/check
+RUN chmod +x /liveness/check

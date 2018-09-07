@@ -1,4 +1,4 @@
-FROM satoshipay/stellar-core:9.2.0-1
+FROM satoshipay/stellar-core:10.0.0
 
 RUN apt-get update -qq && \
   apt-get install lsb-release curl jq -y

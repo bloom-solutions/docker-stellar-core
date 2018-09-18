@@ -14,3 +14,9 @@ RUN export CLOUD_SDK_REPO="cloud-sdk-$(lsb_release -c -s)" && \
 # Add check-synced.sh script that can be used in Kubernetes livenessProbe
 ADD scripts/liveness/check /liveness/check
 RUN chmod +x /liveness/check
+
+# Overwrite their entry.sh script for now, but ensure it stays
+# the same + our changes. Find a way to properly override the
+# ENTRYPOINT of a base image
+# See https://stackoverflow.com/q/41207522
+ADD scripts/entrypoint.sh /entry.sh

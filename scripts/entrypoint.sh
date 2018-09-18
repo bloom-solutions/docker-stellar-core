@@ -14,6 +14,26 @@ function setup_gsutil() {
   echo "gsutil configured"
 }
 
+function setup_history_archive() {
+  local ARCHIVE_HISTORY_INITIALIZED="/data/.archive-history-initialized"
+
+  if [ -f $ARCHIVE_HISTORY_INITIALIZED ]; then
+    echo "Archive history already initialized. Skipping initialization."
+    return 0
+  fi
+
+  if [ -z "$ARCHIVE_HISTORY" ]; then
+    echo "ARCHIVE_HISTORY not configured. Skipping initialization."
+    return 0
+  fi
+
+  echo "Initializing history archive '$ARCHIVE_HISTORY'"
+  echo Calling: stellar-core --conf /stellar-core.cfg --newhist $ARCHIVE_HISTORY
+  stellar-core --conf /stellar-core.cfg --newhist $ARCHIVE_HISTORY
+  echo "Finished initializing history archive '$ARCHIVE_HISTORY'"
+  touch $ARCHIVE_HISTORY_INITIALIZED
+}
+
 function stellar_core_init_db() {
   local DB_INITIALIZED="/data/.db-initialized"
 
@@ -35,5 +55,6 @@ confd -onetime -backend env -log-level error
 
 setup_gsutil
 stellar_core_init_db
+setup_history_archive
 
 exec "$@"

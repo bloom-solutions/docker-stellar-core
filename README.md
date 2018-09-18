@@ -20,7 +20,13 @@ livenessProbe:
   failureThreshold: 10
 ```
 
+# Enabling History Archive
+
+Set the env `ARCHIVE_HISTORY` to be the name of the history archive that has the `put` command. If you started core without this, [Stellar recommends](https://github.com/stellar/stellar-core/blob/master/docs/software/admin.md#configuring-to-publish-to-an-archive) that you delete everything -- the database, horizon, and redeploy.
+
 # Read/write history in Google Storage
+
+Ensure that you have set `ARCHIVE_HISTORY` correctly.
 
 `GS_SERVICE_ACCOUNT_KEY`: if you use Google Storage to write history, set this environment variable to your service account key:
 

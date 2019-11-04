@@ -28,8 +28,8 @@ function setup_history_archive() {
   fi
 
   echo "Initializing history archive '$ARCHIVE_HISTORY'"
-  echo Calling: stellar-core --conf /stellar-core.cfg --newhist $ARCHIVE_HISTORY
-  stellar-core --conf /stellar-core.cfg --newhist $ARCHIVE_HISTORY
+  echo Calling: stellar-core --conf /stellar-core.cfg new-hist $ARCHIVE_HISTORY
+  stellar-core --conf /stellar-core.cfg new-hist $ARCHIVE_HISTORY
   echo "Finished initializing history archive '$ARCHIVE_HISTORY'"
   touch $ARCHIVE_HISTORY_INITIALIZED
 }
@@ -44,7 +44,7 @@ function stellar_core_init_db() {
 
   echo "initializing core db..."
 
-  stellar-core --conf /stellar-core.cfg -newdb
+  stellar-core --conf /stellar-core.cfg new-db
 
   echo "finished initializing core db"
 

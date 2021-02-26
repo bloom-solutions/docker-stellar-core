@@ -1,4 +1,4 @@
-FROM satoshipay/stellar-core:15.0.0-gcloud
+FROM satoshipay/stellar-core:15.1.0-gcloud
 
 # Add check-synced.sh script that can be used in Kubernetes livenessProbe
 ADD scripts/liveness/check /liveness/check
